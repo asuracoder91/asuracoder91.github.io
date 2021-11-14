@@ -412,7 +412,7 @@ button,
 input,
 select,
 textarea {
-  font-family: 'Pretendard Variable', 'Helvetica Neue', sans-serif;
+  font-family: 'Pretendard', 'Helvetica Neue', sans-serif;
 }
 code,
 pre {
@@ -1064,13 +1064,13 @@ a.has-text-grey-lightest:focus {
   font-weight: 700 !important;
 }
 .is-family-primary {
-  font-family: 'Pretendard Variable', 'Helvetica Neue', sans-serif !important;
+  font-family: 'Pretendard', 'Helvetica Neue', sans-serif !important;
 }
 .is-family-secondary {
-  font-family: 'Pretendard Variable', 'Helvetica Neue', sans-serif !important;
+  font-family: 'Pretendard', 'Helvetica Neue', sans-serif !important;
 }
 .is-family-sans-serif {
-  font-family: 'Pretendard Variable', 'Helvetica Neue', sans-serif !important;
+  font-family: 'Pretendard', 'Helvetica Neue', sans-serif !important;
 }
 .is-family-monospace {
   font-family: monospace !important;
@@ -10814,7 +10814,7 @@ article.article .article-meta {
 article.article .title {
   font-size: 2.2em;
   font-weight: 700;
-  letter-spacing: -1.4px;
+  letter-spacing: -0.04em;
   margin-top: 10px;
 }
 article.article .content {
@@ -10824,30 +10824,44 @@ article.article .content {
   letter-spacing: -0.3px;
   color: #282828;
   margin-top: 30px;
+  padding: 10px;
 }
 article.article .content h1 {
   font-size: 1.75em;
-  font-weight: 600;
-  letter-spacing: -1.4px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.45em;
   margin-top: 50px;
   margin-bottom: 20px;
   text-decoration: underline;
 }
 article.article .content h2 {
   font-size: 1.5em;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.45em;
   margin-top: 30px;
 }
 article.article .content h3 {
   font-size: 1.25em;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.45em;
   margin-top: 30px;
 }
 article.article .content h4 {
   font-size: 1.25em;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.45em;
+  margin: 1em 0 1em 0;
 }
 article.article .content h5 {
   font-size: 1em;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.45em;
+  margin: 1em 0 1em 0;
 }
 article.article .content pre {
   font-size: 0.85em;
@@ -10868,6 +10882,9 @@ article.article .content blockquote.pullquote {
 }
 article.article .content blockquote footer strong + cite {
   margin-left: 0.5em;
+}
+article.article .content p {
+  margin: 0 0 1.5em 0;
 }
 article.article .content .message.message-immersive {
   border-radius: 0;
@@ -11607,7 +11624,7 @@ figure.highlight .section {
 .cc-window,
 .cc-revoke {
   font-size: 1.1rem !important;
-  font-family: 'Pretendard Variable', 'Helvetica Neue', sans-serif !important;
+  font-family: 'Pretendard', 'Helvetica Neue', sans-serif !important;
 }
 .cc-window {
   color: #4a4a4a !important;
@@ -11684,4 +11701,4 @@ figure.highlight .section {
     padding: 1.5rem 1rem;
   }
 }
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css");
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
