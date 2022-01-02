@@ -9,8 +9,56 @@
     <atom:link href="https://asuracoder.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Wed, 15 Dec 2021 14:04:34 GMT</pubDate>
+    <pubDate>Sun, 02 Jan 2022 08:57:42 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>인트로 화면(splash screen) 만들기</title>
+      <link>https://asuracoder.com/2022/01/02/flutter-bookbuddy-3/</link>
+      <guid>https://asuracoder.com/2022/01/02/flutter-bookbuddy-3/</guid>
+      <pubDate>Sun, 02 Jan 2022 01:45:20 GMT</pubDate>
+      
+        
+        
+      <description>&lt;ol&gt;
+&lt;li&gt;앱을 처음 실행할 때 로고나 이미지를 잠깐동안 표시하는 인트로 화면(splash screen)을 만들어보겠습니다.&lt;/li&gt;
+&lt;li&gt;flutter_native_splash 같은 패키지를 이용할 수도 있지만 저는 안드로이드, iOS 네이티</description>
+        
+      
+      
+      
+      <content:encoded><![CDATA[<ol><li>앱을 처음 실행할 때 로고나 이미지를 잠깐동안 표시하는 인트로 화면(splash screen)을 만들어보겠습니다.</li><li>flutter_native_splash 같은 패키지를 이용할 수도 있지만 저는 안드로이드, iOS 네이티브에 직접 만드는 쪽을 택했습니다. </li></ol><h1 id="Adobe-XD-에서-이미지-추출하기"><a href="#Adobe-XD-에서-이미지-추출하기" class="headerlink" title="Adobe XD 에서 이미지 추출하기"></a>Adobe XD 에서 이미지 추출하기</h1><p>책벗의 인트로 화면은 심플하게 하얀 배경에 로고 이미지를 띄우는 것으로 정했습니다. 아래 그림과 같습니다.</p><p><img src="../image/bookbuddy/3_0.png"></p><p><br/><br/><br>그러면 먼저 AdobeXD에서 이미지를 추출하겠습니다. 네이티브 방식을 따르기로 했으니 iOS용, 안드로이드용 이미지를 각각 추출합니다. 아래와 같이 로고이미지를 선택하고 레이어에서 이름을 splash_image로 변경했습니다.</p><p><img src="../image/bookbuddy/3_1.png"></p><p><br/><br/><br>파일 - 내보내기 - 선택됨을 누르거나 단축키인 Ctrl+E를 눌러줍니다.</p><p><img src="../image/bookbuddy/3_2.png"></p><p><br/><br/><br>에셋 내보내기 화면이 나오면 iOS, Android를 각각 선택해서 이미지를 내보냅니다. 해상도별로 iOS용으로는 1x, 2x, 3x 3종류의 이미지가 나오고 안드로이드는 ldpi부터 xxxhdpi까지 6종류의 이미지가 내보내집니다.</p><p><img src="../image/bookbuddy/3_3.png"><br><br/><br/></p><h1 id="안드로이드-Splash-intro-만들기"><a href="#안드로이드-Splash-intro-만들기" class="headerlink" title="안드로이드 Splash intro 만들기"></a>안드로이드 Splash intro 만들기</h1><h2 id="이미지-복사하기"><a href="#이미지-복사하기" class="headerlink" title="이미지 복사하기"></a>이미지 복사하기</h2><p>안드로이드 스튜디오에서 flutter 프로젝트를 부른다음 프로젝터 내부 디렉토리중 android - app - src - main - res로 가면 해상도별 이미지 mipmap이 있습니다. XD에서 만든 이미지를 아래와 같이 각각 해상도별로 넣어줍니다. </p><p><img src="../image/bookbuddy/3_5.png"></p><h2 id="xml-파일-수정"><a href="#xml-파일-수정" class="headerlink" title="xml 파일 수정"></a>xml 파일 수정</h2><p>먼저 mipmap과 동일한 위치인 res 디렉토리에 있는 AndroidManifest.xml 파일을 엽니다. 해당 파일에 아래와 같은 내용이 있다면 삭제해줍니다. flutter 2.5부터는 해당 내용이 deprecated 되었으므로 그대로 두면 “A splash screen was provided to Flutter, but this is deprecated” 라는 에러 메시지가 표시됩니다.</p><p>하단의 코드를 전부 삭제해주시면 됩니다.</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta-data</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:name</span>=<span class="string">&quot;io.flutter.embedding.android.SplashScreenDrawable&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">android:resource</span>=<span class="string">&quot;@drawable/launch_background&quot;</span></span></span><br><span class="line"><span class="tag">  /&gt;</span></span><br></pre></td></tr></table></figure><br/><p>다음엔 splash screen을 실제로 표시하게될 launch_background.xml을 수정합니다. 안드로이드 API 21 이상을 쓰면 drawable-v21 디렉토리의 launch_background.xml을 사용하고, 21미만은 drawable 디렉토리의 파일을 사용하므로 그냥 두개다 수정합니다.</p><p>저는 하얀 배경을 쓰니 배경색은 white를 그대로 두고, 가운데 들어갈 이미지만 수정해줬습니다. splash_image 뒤에 .png는 붙이지 않습니다.</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">layer-list</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:drawable</span>=<span class="string">&quot;@android:color/white&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- You can insert your own image assets here --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">bitmap</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:gravity</span>=<span class="string">&quot;center&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:src</span>=<span class="string">&quot;@mipmap/splash_image&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">layer-list</span>&gt;</span></span><br></pre></td></tr></table></figure><p>여기까지 하면 안드로이드 인트로 화면표시는 완료되었습니다.</p><h1 id="iOS-Splash-intro-만들기"><a href="#iOS-Splash-intro-만들기" class="headerlink" title="iOS Splash intro 만들기"></a>iOS Splash intro 만들기</h1><h2 id="이미지-복사하기-1"><a href="#이미지-복사하기-1" class="headerlink" title="이미지 복사하기"></a>이미지 복사하기</h2><p>ios 디렉토리 밑 Runner - Assets.xcassets - LaunchImage.imageset 아래에 내보내기한 3개의 이미지 파일을 복사합니다. (1x, 2x, 3x 3개)</p><p><img src="../image/bookbuddy/3_6.png"></p><p>터미널에서  open ios/Runner.xcworkspace 를 입력해 XCode Runner를 띄웁니다.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base &gt; open ios/Runner.xcworkspace</span><br></pre></td></tr></table></figure><br/>Runner Root 아래의 Runner - Assets.xcassets에 LaunchImage를 선택합니다. 아래와 같이 1x, 2x, 3x에 해당하는 이미지를 집어넣을수 있습니다. 아래의 !가 찍혀있는 각 이미지를 끌어서 위의 해당 배수에 각각 넣어줍니다.<p><img src="../image/bookbuddy/3_7.png"></p><p>안드로이드와 iOS의 splash screen 작업이 끝났습니다.<br>앱을 빌드해서 제대로 나오는지 확인합니다.</p>]]></content:encoded>
+      
+      
+      <category domain="https://asuracoder.com/categories/Flutter/">Flutter</category>
+      
+      <category domain="https://asuracoder.com/categories/Flutter/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%B1%85%EB%B2%97/">프로젝트 책벗</category>
+      
+      
+      <category domain="https://asuracoder.com/tags/flutter/">flutter</category>
+      
+      <category domain="https://asuracoder.com/tags/dart/">dart</category>
+      
+      <category domain="https://asuracoder.com/tags/android/">android</category>
+      
+      <category domain="https://asuracoder.com/tags/%ED%94%8C%EB%9F%AC%ED%84%B0/">플러터</category>
+      
+      <category domain="https://asuracoder.com/tags/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C/">안드로이드</category>
+      
+      <category domain="https://asuracoder.com/tags/iOS/">iOS</category>
+      
+      <category domain="https://asuracoder.com/tags/%EC%8A%A4%EB%A7%88%ED%8A%B8%ED%8F%B0/">스마트폰</category>
+      
+      <category domain="https://asuracoder.com/tags/%EC%B1%85%EB%B2%97/">책벗</category>
+      
+      <category domain="https://asuracoder.com/tags/bookbuddy/">bookbuddy</category>
+      
+      <category domain="https://asuracoder.com/tags/adobexd/">adobexd</category>
+      
+      
+      <comments>https://asuracoder.com/2022/01/02/flutter-bookbuddy-3/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>책벗 프로젝트 진행상황</title>
@@ -221,7 +269,7 @@
       
       <category domain="https://asuracoder.com/tags/%EC%B1%85%EB%B2%97/">책벗</category>
       
-      <category domain="https://asuracoder.com/tags/bookbirdie/">bookbirdie</category>
+      <category domain="https://asuracoder.com/tags/bookbuddy/">bookbuddy</category>
       
       
       <comments>https://asuracoder.com/2021/11/13/flutter-bookbirdie-1/#disqus_thread</comments>

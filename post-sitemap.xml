@@ -9,6 +9,22 @@
 
 
     <url>
+        <loc>https://asuracoder.com/2022/01/02/flutter-bookbuddy-3/</loc>
+        <lastmod>2022-01-02T08:57:42.862Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://asuracoder.com/2021/11/13/flutter-bookbirdie-1/</loc>
+        <lastmod>2022-01-02T01:53:37.179Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://asuracoder.com/2021/12/15/flutter-bookbuddy-2/</loc>
         <lastmod>2021-12-15T14:04:34.516Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -35,14 +51,6 @@
     <url>
         <loc>https://asuracoder.com/2021/11/14/algorithm-start/</loc>
         <lastmod>2021-11-15T13:32:52.302Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://asuracoder.com/2021/11/13/flutter-bookbirdie-1/</loc>
-        <lastmod>2021-11-15T13:14:51.741Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
